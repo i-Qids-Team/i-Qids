@@ -21,32 +21,33 @@ void _doNothing(){}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: Drawer(
-      //     child: ListView(
-      //       children: <Widget>[
-      //         DrawerHeader(
-      //           decoration: BoxDecoration(
-      //           image: DecorationImage(
-      //             image: AssetImage('assets/bg.png'),
-      //             fit: BoxFit.cover,
-      //         ),
-      //         ),
-      //         child: Image(
-      //            alignment: Alignment.center,
-      //             fit:  BoxFit.contain,
-      //             image: AssetImage('assets/main.gif'),
-      //         ),
-      //           ),
-      //             ListTitle(Icons.person,'Profile', _doNothing ),
-      //             ListTitle(Icons.notifications,'Notification', _doNothing ),
-      //             ListTitle(Icons.settings,'Setting', _doNothing ),
-      //       ],
-      //     ),
-      //   ),  
+      drawer: Drawer(
+          child: ListView(
+            children: <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/bg.png'),
+                  fit: BoxFit.cover,
+              ),
+              ),
+              child: Image(
+                 alignment: Alignment.center,
+                  fit:  BoxFit.contain,
+                  image: AssetImage('assets/main.gif'),
+              ),
+                ),
+                  ListTitle(Icons.person,'Profile', _doNothing ),
+                  ListTitle(Icons.notifications,'Notification', _doNothing ),
+                  ListTitle(Icons.settings,'Setting', _doNothing ),
+                  ListTitle(Icons.exit_to_app,'Logout', Notification ),
+            ],
+          ),
+        ),  
       appBar: AppBar(   
         leading: IconButton(icon: Icon(Icons.settings), onPressed: _doNothing),   
         title: Text('Welcome Corona!'),      
-        backgroundColor: Colors.brown[100],
+        backgroundColor: Colors.red[300],
         actions: <Widget> [          
           // Material(            
           //   child: InkWell(
@@ -166,7 +167,7 @@ class ListTitle extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
       child: Container(
         decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
+          border: Border(bottom: BorderSide(color: Colors.red.shade300)),
         ),
         child: InkWell(
           splashColor: Colors.orangeAccent,
@@ -195,6 +196,20 @@ class ListTitle extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class Notification extends StatelessWidget{
+
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Notifications"),
+      ),
+      body: Container(
+
+      ),
+    )
   }
 }
 
