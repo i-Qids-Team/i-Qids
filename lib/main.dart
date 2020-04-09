@@ -14,12 +14,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Menu extends StatelessWidget {  
-
+class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(          
+      appBar: AppBar(
           title: Text('Welcome Corona!'),
           backgroundColor: Colors.red[300],
           actions: <Widget>[
@@ -35,11 +34,11 @@ class Menu extends StatelessWidget {
             //   )
             // ),
           ]),
-          drawer: _Drawer(),
-          body: Container(
-          padding: const EdgeInsets.all(10.0),
-          height: double.infinity,
-          decoration: BoxDecoration(
+      drawer: _Drawer(),
+      body: Container(
+        padding: const EdgeInsets.all(10.0),
+        height: double.infinity,
+        decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/bg.png'),
             fit: BoxFit.cover,
@@ -69,7 +68,7 @@ class Menu extends StatelessWidget {
               child: RaisedButton(
                 color: Colors.blue[300],
                 textColor: Colors.white,
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Text("Body Part", style: TextStyle(fontSize: 25)),
                 onPressed: () {},
                 shape: RoundedRectangleBorder(
@@ -83,7 +82,7 @@ class Menu extends StatelessWidget {
               child: RaisedButton(
                 color: Colors.purple[200],
                 textColor: Colors.white,
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Text("Animal", style: TextStyle(fontSize: 25)),
                 onPressed: () {},
                 shape: RoundedRectangleBorder(
@@ -97,7 +96,7 @@ class Menu extends StatelessWidget {
               child: RaisedButton(
                 color: Colors.lightGreen[200],
                 textColor: Colors.white,
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Text("Color", style: TextStyle(fontSize: 25)),
                 onPressed: () {},
                 shape: RoundedRectangleBorder(
@@ -111,7 +110,7 @@ class Menu extends StatelessWidget {
               child: RaisedButton(
                 color: Colors.redAccent[100],
                 textColor: Colors.white,
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Text("Sport", style: TextStyle(fontSize: 25)),
                 onPressed: () {},
                 shape: RoundedRectangleBorder(
@@ -122,7 +121,8 @@ class Menu extends StatelessWidget {
         ),
       ),
     );
-  }
+  } //Scaffold
+
 }
 
 class ListTitle extends StatelessWidget {
@@ -169,121 +169,174 @@ class ListTitle extends StatelessWidget {
   }
 }
 
-  class _Drawer extends StatelessWidget {
-    @override
-    Widget build(BuildContext context) {
-      return Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/bg.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Image(
-                alignment: Alignment.center,
-                fit: BoxFit.contain,
-                image: AssetImage('assets/main.gif'),
+class _Drawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        children: <Widget>[
+          DrawerHeader(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/bg.png'),
+                fit: BoxFit.cover,
               ),
             ),
-            Card(
-                child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: Colors.red.shade600)),
-                    ),
-                    child: InkWell(
-                      splashColor: Colors.orangeAccent,
-                      child: Container(
-                        height: 60,
-                        child: ListTile(
-                          leading: Icon(Icons.person),
-                          title: Text('Profile'),
-                          onTap: () {
-                            return Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => UserProfile()),
-                            );
-                          },
-                        ),
+            child: Image(
+              alignment: Alignment.center,
+              fit: BoxFit.contain,
+              image: AssetImage('assets/main.gif'),
+            ),
+          ),
+          Card(
+              child: Container(
+                  decoration: BoxDecoration(
+                    border:
+                        Border(bottom: BorderSide(color: Colors.red.shade600)),
+                  ),
+                  child: InkWell(
+                    splashColor: Colors.orangeAccent,
+                    child: Container(
+                      height: 60,
+                      child: ListTile(
+                        leading: Icon(Icons.person),
+                        title: Text('Profile'),
+                        onTap: () {
+                          return Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => UserProfile()),
+                          );
+                        },
                       ),
-                    ))),
-            Card(
-                child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: Colors.red.shade600)),
                     ),
-                    child: InkWell(
-                      splashColor: Colors.orangeAccent,
-                      child: Container(
-                        height: 60,
-                        child: ListTile(
-                          leading: Icon(Icons.notifications),
-                          title: Text('Notification'),
-                          onTap: () {
-                            return Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Notification()),
-                            );
-                          },
-                        ),
+                  ))),
+          Card(
+              child: Container(
+                  decoration: BoxDecoration(
+                    border:
+                        Border(bottom: BorderSide(color: Colors.red.shade600)),
+                  ),
+                  child: InkWell(
+                    splashColor: Colors.orangeAccent,
+                    child: Container(
+                      height: 60,
+                      child: ListTile(
+                        leading: Icon(Icons.notifications),
+                        title: Text('Notification'),
+                        onTap: () {
+                          return Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Notification()),
+                          );
+                        },
                       ),
-                    ))),
-            Card(
-                child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: Colors.red.shade600)),
                     ),
-                    child: InkWell(
-                      splashColor: Colors.orangeAccent,
-                      child: Container(
-                        height: 60,
-                        child: ListTile(
-                          leading: Icon(Icons.settings),
-                          title: Text('Setting'),
-                          onTap: () {
-                            return Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Notification()),
-                            );
-                          },
-                        ),
+                  ))),
+          Card(
+              child: Container(
+                  decoration: BoxDecoration(
+                    border:
+                        Border(bottom: BorderSide(color: Colors.red.shade600)),
+                  ),
+                  child: InkWell(
+                    splashColor: Colors.orangeAccent,
+                    child: Container(
+                      height: 60,
+                      child: ListTile(
+                        leading: Icon(Icons.settings),
+                        title: Text('Setting'),
+                        onTap: () {
+                          _settingBottomSheet(context);
+                        },
                       ),
-                    ))),
-            Card(
-                child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: Colors.red.shade600)),
                     ),
-                    child: InkWell(
-                      splashColor: Colors.orangeAccent,
-                      child: Container(
-                        height: 60,
-                        child: ListTile(
-                          leading: Icon(Icons.exit_to_app),
-                          title: Text('Logout'),
-                          onTap: () {
-                            return Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Logout()),
-                            );
-                          },
-                        ),
+                  ))),
+          Card(
+              child: Container(
+                  decoration: BoxDecoration(
+                    border:
+                        Border(bottom: BorderSide(color: Colors.red.shade600)),
+                  ),
+                  child: InkWell(
+                    splashColor: Colors.orangeAccent,
+                    child: Container(
+                      height: 60,
+                      child: ListTile(
+                        leading: Icon(Icons.exit_to_app),
+                        title: Text('Logout'),
+                        onTap: () {
+                          return Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Logout()),
+                          );
+                        },
                       ),
-                    ))),
-          ],
-        ),
-      );    
-    }
+                    ),
+                  ))),
+        ],
+      ),
+    );
+  } //Drawer
+
+  void _settingBottomSheet(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+              color: Color(0xFF737373),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).canvasColor,
+                    borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(30),
+                  topRight: const Radius.circular(30),
+                )),
+                height: MediaQuery.of(context).size.height * .60,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text("Setting Page"),
+                          Spacer(),
+                          IconButton(
+                            icon: Icon(
+                              Icons.cancel,
+                              color: Colors.orangeAccent,
+                              size: 25,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text("Setting Page"),
+                          Spacer(),
+                          IconButton(
+                            icon: Icon(
+                              Icons.cancel,
+                              color: Colors.orangeAccent,
+                              size: 25,
+                            ),
+                            onPressed: () {
+                              // Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ));
+        });
   }
+} //_Drawer
 
 class Notification extends StatelessWidget {
   final items = List<String>.generate(5, (i) => "Message ${i + 1}");

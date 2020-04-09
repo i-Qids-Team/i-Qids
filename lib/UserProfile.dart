@@ -52,5 +52,6 @@ class UserProfile extends StatelessWidget {
                  ),                                  
               ],
             )));
-  }
+  } //Scaffold
+
 }
