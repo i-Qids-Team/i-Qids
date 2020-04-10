@@ -193,35 +193,34 @@ class __DrawerState extends State<_Drawer> {
 
   TextEditingController customeController = new TextEditingController();
 
- Future<String> createAlertDialog(BuildContext context) {
-    return showDialog(context: context, builder: (context) {
-      return AlertDialog(
-        title: Text('New Username'),
-        content: TextField(
-          controller: customeController,
-        ),
-        actions: <Widget>[
-          MaterialButton(
-            elevation: 5.0,
-            child: Text('Save'),
-            onPressed: () {
-
-              Navigator.of(context).pop(customeController.text.toString());
-            },
-          ),
-          MaterialButton(
-            elevation: 5.0,
-            child: Text('Cancel'),
-            onPressed: () {
-               Navigator.of(context).pop();
-            },
-          )
-        ],
-      );
-    });
-
+  Future<String> createAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('New Username'),
+            content: TextField(
+              controller: customeController,
+            ),
+            actions: <Widget>[
+              MaterialButton(
+                elevation: 5.0,
+                child: Text('Save'),
+                onPressed: () {
+                  Navigator.of(context).pop(customeController.text.toString());
+                },
+              ),
+              MaterialButton(
+                elevation: 5.0,
+                child: Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -337,32 +336,55 @@ class __DrawerState extends State<_Drawer> {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext bc) {
+          
           return Container(
+            // margin: const EdgeInsets.only(top: 5, left: 15, right: 15),
               color: Color(0xFF737373),
               child: Container(
                 decoration: BoxDecoration(
-                    color: Theme.of(context).canvasColor,
+                    // color: Theme.of(context).canvasColor,
+                    color: Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(30),
                       topRight: const Radius.circular(30),
                     )),
-                height: MediaQuery.of(context).size.height * .60,
+                    
+
+                height: 250,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10.0),
+                  
                   child: Column(
+                  
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      // Row(
-                      //   children: <Widget>[
-                      //     ListTile(
-                      //       leading: Icon(Icons.speaker),
-                      //       title: Text('Sound Controller'),
-                      //       onTap: () {},
-                      //     ),
-                      //   ],
-                      // ),
+                      
+                     
                       Row(
+                        
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text("Setting Page"),
+                          // Container(
+                          //   decoration: BoxDecoration(
+                          //     color: Colors.white,
+                          //     border: Border.all(
+                          //       color: Colors.black,
+                          //       width: 25,
+                          //     ),
+                          //     borderRadius: BorderRadius.all(
+                          //       Radius.circular(100),
+                          //     ),
+                          //   ),
+                            
+                          // ),
+                          Text("SETTING PAGE",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold)),
+                          
+
                           Spacer(),
                           IconButton(
                             icon: Icon(
@@ -375,17 +397,13 @@ class __DrawerState extends State<_Drawer> {
                             },
                           )
                         ],
+                        
                       ),
+
                       Row(
                         children: <Widget>[
-                          // IconButton(
-                          //   icon: Icon(
-                          //     Icons.speaker,
-                          //     color: Colors.orangeAccent,
-                          //     size: 25,
-                          //   ),
 
-                          Text("Sound Mute"),
+                          Text("Sound Mute", style: TextStyle(color: Colors.black ),),
                           Spacer(),
                           new Switch(
                               activeColor: Colors.green,
@@ -393,18 +411,10 @@ class __DrawerState extends State<_Drawer> {
                               onChanged: (bool value) {
                                 _onChanged(value);
                               }),
-                          // IconButton(
-                          //   icon: Icon(
-                          //     Icons.speaker,
-                          //     color: Colors.orangeAccent,
-                          //     size: 25,
-                          //   ),
-                          //   onPressed: () {
-                          //     // Navigator.of(context).pop();
-                          //   },
-                          // )
+                          
                         ],
                       ),
+
                       Row(children: <Widget>[
                         Text("Font Size"),
                         Spacer(),
@@ -436,35 +446,20 @@ class __DrawerState extends State<_Drawer> {
                             ),
                             onPressed: () {
                               createAlertDialog(context).then((onValue) {
-                                SnackBar mySnackbar = SnackBar(content: Text('Username change to $onValue'));
+                                SnackBar mySnackbar = SnackBar(
+                                    content:
+                                        Text('Username change to $onValue'));
                                 Scaffold.of(context).showSnackBar(mySnackbar);
-                              }); 
+                              });
                             },
                           )
                         ],
                       ),
 
-                      //   Row(
-                      // children: <Widget>[
-                      //   Text("Font Size"),
-                      //   Spacer(),
-                      // new Switch(
-                      //     value: _value,
-                      //     onChanged: (bool value) {
-                      //       _onChanged(value);
-                      //     }),
-                      //   new SwitchListTile(
-                      //     title: new Text("Music"),
-                      //     activeColor: Colors.red,
-                      //     secondary: const Icon(Icons.music_note),
-                      //       value: _value,
-                      //       onChanged: (bool value) {
-                      //         _onChanged(value);
-                      //       }),
-                      //   ],
-                      // ),
+                      
                     ],
                   ),
+                   
                 ),
               ));
         });
