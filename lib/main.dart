@@ -191,6 +191,37 @@ class __DrawerState extends State<_Drawer> {
   var _fontsize = ['2', '4', '6', '8', '10', '12'];
   var _currentFontSelected = '10';
 
+  TextEditingController customeController = new TextEditingController();
+
+ Future<String> createAlertDialog(BuildContext context) {
+    return showDialog(context: context, builder: (context) {
+      return AlertDialog(
+        title: Text('New Username'),
+        content: TextField(
+          controller: customeController,
+        ),
+        actions: <Widget>[
+          MaterialButton(
+            elevation: 5.0,
+            child: Text('Save'),
+            onPressed: () {
+
+              Navigator.of(context).pop(customeController.text.toString());
+            },
+          ),
+          MaterialButton(
+            elevation: 5.0,
+            child: Text('Cancel'),
+            onPressed: () {
+               Navigator.of(context).pop();
+            },
+          )
+        ],
+      );
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -391,45 +422,46 @@ class __DrawerState extends State<_Drawer> {
                           value: _currentFontSelected,
                         ),
                       ]),
+
                       Row(
                         children: <Widget>[
-                          Text("Font Size"),
+                          Text("Change Username"),
                           Spacer(),
-                          DropdownButton<String>(
-                            items: _fontsize.map((String dropDownStringItem) {
-                              return DropdownMenuItem<String>(
-                                value: dropDownStringItem,
-                                child: Text(dropDownStringItem),
-                              );
-                            }).toList(),
-                            onChanged: (String newValueSelected) {
-                              setState(() {
-                                this._currentFontSelected = newValueSelected;
-                              });
+                          IconButton(
+                            icon: Icon(
+                              Icons.edit,
+                              color: Colors.orangeAccent,
+                              size: 25,
+                            ),
+                            onPressed: () {
+                              createAlertDialog(context).then((onValue) {
+                                SnackBar mySnackbar = SnackBar(content: Text('Username change to $onValue'));
+                                Scaffold.of(context).showSnackBar(mySnackbar);
+                              }); 
                             },
-                            value: _currentFontSelected,
-                          ),
-                          //   Row(
-                          // children: <Widget>[
-                          //   Text("Font Size"),
-                          //   Spacer(),
-                          // new Switch(
-                          //     value: _value,
-                          //     onChanged: (bool value) {
-                          //       _onChanged(value);
-                          //     }),
-                          //   new SwitchListTile(
-                          //     title: new Text("Music"),
-                          //     activeColor: Colors.red,
-                          //     secondary: const Icon(Icons.music_note),
-                          //       value: _value,
-                          //       onChanged: (bool value) {
-                          //         _onChanged(value);
-                          //       }),
-                          // ]
-                          // )
+                          )
                         ],
                       ),
+
+                      //   Row(
+                      // children: <Widget>[
+                      //   Text("Font Size"),
+                      //   Spacer(),
+                      // new Switch(
+                      //     value: _value,
+                      //     onChanged: (bool value) {
+                      //       _onChanged(value);
+                      //     }),
+                      //   new SwitchListTile(
+                      //     title: new Text("Music"),
+                      //     activeColor: Colors.red,
+                      //     secondary: const Icon(Icons.music_note),
+                      //       value: _value,
+                      //       onChanged: (bool value) {
+                      //         _onChanged(value);
+                      //       }),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
