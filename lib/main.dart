@@ -187,6 +187,10 @@ class __DrawerState extends State<_Drawer> {
     });
   }
 
+  // String fontSize = "";
+  var _fontsize = ['2', '4', '6', '8', '10', '12'];
+  var _currentFontSelected = '10';
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -341,24 +345,22 @@ class __DrawerState extends State<_Drawer> {
                         ],
                       ),
                       Row(
-                        
                         children: <Widget>[
-                         // IconButton(
+                          // IconButton(
                           //   icon: Icon(
                           //     Icons.speaker,
                           //     color: Colors.orangeAccent,
                           //     size: 25,
-                          //   ), 
-                          
+                          //   ),
+
                           Text("Sound Mute"),
                           Spacer(),
                           new Switch(
-                            activeColor: Colors.green,
-                            value: _value,
-                            onChanged: (bool value) {
-                              _onChanged(value);
-                            }
-                            ),
+                              activeColor: Colors.green,
+                              value: _value,
+                              onChanged: (bool value) {
+                                _onChanged(value);
+                              }),
                           // IconButton(
                           //   icon: Icon(
                           //     Icons.speaker,
@@ -372,20 +374,61 @@ class __DrawerState extends State<_Drawer> {
                         ],
                       ),
                       Row(children: <Widget>[
-                        // new Switch(
-                        //     value: _value,
-                        //     onChanged: (bool value) {
-                        //       _onChanged(value);
-                        //     }),
-                      //   new SwitchListTile(
-                      //     title: new Text('Music'),
-                      //     activeColor: Colors.red,
-                      //     secondary: const Icon(Icons.music_note),
-                      //       value: _value,
-                      //       onChanged: (bool value) {
-                      //         _onChanged(value);
-                      //       }),
-                      ],
+                        Text("Font Size"),
+                        Spacer(),
+                        DropdownButton<String>(
+                          items: _fontsize.map((String dropDownStringItem) {
+                            return DropdownMenuItem<String>(
+                              value: dropDownStringItem,
+                              child: Text(dropDownStringItem),
+                            );
+                          }).toList(),
+                          onChanged: (String newValueSelected) {
+                            setState(() {
+                              this._currentFontSelected = newValueSelected;
+                            });
+                          },
+                          value: _currentFontSelected,
+                        ),
+                      ]),
+                      Row(
+                        children: <Widget>[
+                          Text("Font Size"),
+                          Spacer(),
+                          DropdownButton<String>(
+                            items: _fontsize.map((String dropDownStringItem) {
+                              return DropdownMenuItem<String>(
+                                value: dropDownStringItem,
+                                child: Text(dropDownStringItem),
+                              );
+                            }).toList(),
+                            onChanged: (String newValueSelected) {
+                              setState(() {
+                                this._currentFontSelected = newValueSelected;
+                              });
+                            },
+                            value: _currentFontSelected,
+                          ),
+                          //   Row(
+                          // children: <Widget>[
+                          //   Text("Font Size"),
+                          //   Spacer(),
+                          // new Switch(
+                          //     value: _value,
+                          //     onChanged: (bool value) {
+                          //       _onChanged(value);
+                          //     }),
+                          //   new SwitchListTile(
+                          //     title: new Text("Music"),
+                          //     activeColor: Colors.red,
+                          //     secondary: const Icon(Icons.music_note),
+                          //       value: _value,
+                          //       onChanged: (bool value) {
+                          //         _onChanged(value);
+                          //       }),
+                          // ]
+                          // )
+                        ],
                       ),
                     ],
                   ),
