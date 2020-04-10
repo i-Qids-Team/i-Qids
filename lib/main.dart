@@ -27,17 +27,7 @@ class _MenuState extends State<Menu> {
           title: Text('Welcome Corona!'),
           backgroundColor: Colors.red[300],
           actions: <Widget>[
-            // Material(
-            //   child: InkWell(
-            //     onTap: _doNothing,
-            //     child:  Image(
-            //         alignment: Alignment.topRight,
-            //         fit:  BoxFit.contain,
-            //         image: AssetImage('assets/logout.png'),
-
-            // ),
-            //   )
-            // ),
+            
           ]),
       drawer: _Drawer(),
       body: Container(
@@ -58,14 +48,7 @@ class _MenuState extends State<Menu> {
               'assets/main.gif',
               height: 190,
             ),
-            // Container(
-            //   height: 170.0,
-            //   decoration: BoxDecoration(
-            //       image: DecorationImage(
-            //           image: AssetImage('assets/main.gif'))
-            //  ),
-            // ),
-            // Image(image: AssetImage("assets/ajax-main.gif")),
+            
             SizedBox(height: 20.0),
             SizedBox(
               height: 60,
@@ -187,7 +170,6 @@ class __DrawerState extends State<_Drawer> {
     });
   }
 
-  // String fontSize = "";
   var _fontsize = ['2', '4', '6', '8', '10', '12'];
   var _currentFontSelected = '10';
 
@@ -220,6 +202,31 @@ class __DrawerState extends State<_Drawer> {
             ],
           );
         });
+  }
+
+  //createAboutDialog
+
+  createAboutDialog (BuildContext context) {
+    return showDialog(
+      context: context, 
+      builder: (context) {
+        return AlertDialog(
+          title: Text('About i-Qids'),
+          content: 
+          Text('The aim of the proposed solution is to provide the user an attractive and effective training digital module implements gamification element that is suitable for 4-7 years old children to enhance the Visual, Audio, Reading and Kinesthetic (VARK) skills at the young age. Further info can be found in the game section.',
+          style: TextStyle(fontSize: 12)),
+          actions: <Widget>[
+              MaterialButton(
+                elevation: 5.0,
+                child: Text('close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+          ],
+        );
+      }
+      );
   }
 
   @override
@@ -336,54 +343,31 @@ class __DrawerState extends State<_Drawer> {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext bc) {
-          
           return Container(
-            // margin: const EdgeInsets.only(top: 5, left: 15, right: 15),
               color: Color(0xFF737373),
               child: Container(
-                decoration: BoxDecoration(
-                    // color: Theme.of(context).canvasColor,
+                decoration: BoxDecoration(                    
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(30),
                       topRight: const Radius.circular(30),
                     )),
-                    
-
-                height: 250,
+                height: 350,
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
-                  
                   child: Column(
-                  
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      
-                     
                       Row(
-                        
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     color: Colors.white,
-                          //     border: Border.all(
-                          //       color: Colors.black,
-                          //       width: 25,
-                          //     ),
-                          //     borderRadius: BorderRadius.all(
-                          //       Radius.circular(100),
-                          //     ),
-                          //   ),
-                            
-                          // ),
+                          
                           Text("SETTING PAGE",
                               style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold)),
-                          
 
                           Spacer(),
                           IconButton(
@@ -397,13 +381,14 @@ class __DrawerState extends State<_Drawer> {
                             },
                           )
                         ],
-                        
                       ),
 
                       Row(
                         children: <Widget>[
-
-                          Text("Sound Mute", style: TextStyle(color: Colors.black ),),
+                          Text(
+                            "Sound Mute",
+                            style: TextStyle(color: Colors.black),
+                          ),
                           Spacer(),
                           new Switch(
                               activeColor: Colors.green,
@@ -411,7 +396,6 @@ class __DrawerState extends State<_Drawer> {
                               onChanged: (bool value) {
                                 _onChanged(value);
                               }),
-                          
                         ],
                       ),
 
@@ -448,18 +432,32 @@ class __DrawerState extends State<_Drawer> {
                               createAlertDialog(context).then((onValue) {
                                 SnackBar mySnackbar = SnackBar(
                                     content:
-                                        Text('Username change to $onValue'));
+                                        Text('New username has successfully changed!'));
                                 Scaffold.of(context).showSnackBar(mySnackbar);
                               });
                             },
                           )
                         ],
-                      ),
+                      ), //Row
 
-                      
+                      Row(
+                        children: <Widget>[
+                          Text("About i-Qids"),
+                          Spacer(),
+                          IconButton(
+                            icon: Icon(
+                              Icons.info,
+                              color: Colors.orangeAccent,
+                              size: 25,
+                            ),
+                            onPressed: () {
+                              createAboutDialog(context);
+                            },
+                          )
+                        ],
+                      ),
                     ],
                   ),
-                   
                 ),
               ));
         });
@@ -488,7 +486,6 @@ class Notification extends StatelessWidget {
                   setState(() {
                     items.removeAt(index);
                   });
-                  //Scaffold.of(context).showSnackBar(SnackBar(content: Text("Message deleted")));
                 },
                 background: Container(
                   child: Center(
@@ -506,8 +503,7 @@ class Notification extends StatelessWidget {
                     title: Text('$item'),
                     subtitle: Text('Collect more score to beat others. '
                         '20/3/2020'),
-                    isThreeLine: true,
-                    // trailing: Icon(Icons.swap_horizontal_circle),
+                    isThreeLine: true,                    
                   ),
                 ),
               );
