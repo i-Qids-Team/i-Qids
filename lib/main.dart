@@ -14,7 +14,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Menu extends StatelessWidget {
+class Menu extends StatefulWidget {
+  @override
+  _MenuState createState() => _MenuState();
+}
+
+class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,8 +126,7 @@ class Menu extends StatelessWidget {
         ),
       ),
     );
-  } //Scaffold
-
+  }
 }
 
 class ListTitle extends StatelessWidget {
@@ -169,7 +173,20 @@ class ListTitle extends StatelessWidget {
   }
 }
 
-class _Drawer extends StatelessWidget {
+class _Drawer extends StatefulWidget {
+  @override
+  __DrawerState createState() => __DrawerState();
+}
+
+class __DrawerState extends State<_Drawer> {
+  bool _value = false;
+
+  void _onChanged(bool value) {
+    setState(() {
+      _value = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -278,7 +295,7 @@ class _Drawer extends StatelessWidget {
         ],
       ),
     );
-  } //Drawer
+  }
 
   void _settingBottomSheet(context) {
     showModalBottomSheet(
@@ -288,16 +305,25 @@ class _Drawer extends StatelessWidget {
               color: Color(0xFF737373),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).canvasColor,
+                    color: Theme.of(context).canvasColor,
                     borderRadius: BorderRadius.only(
-                  topLeft: const Radius.circular(30),
-                  topRight: const Radius.circular(30),
-                )),
+                      topLeft: const Radius.circular(30),
+                      topRight: const Radius.circular(30),
+                    )),
                 height: MediaQuery.of(context).size.height * .60,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: <Widget>[
+                      // Row(
+                      //   children: <Widget>[
+                      //     ListTile(
+                      //       leading: Icon(Icons.speaker),
+                      //       title: Text('Sound Controller'),
+                      //       onTap: () {},
+                      //     ),
+                      //   ],
+                      // ),
                       Row(
                         children: <Widget>[
                           Text("Setting Page"),
@@ -315,20 +341,51 @@ class _Drawer extends StatelessWidget {
                         ],
                       ),
                       Row(
+                        
                         children: <Widget>[
-                          Text("Setting Page"),
+                         // IconButton(
+                          //   icon: Icon(
+                          //     Icons.speaker,
+                          //     color: Colors.orangeAccent,
+                          //     size: 25,
+                          //   ), 
+                          
+                          Text("Sound Mute"),
                           Spacer(),
-                          IconButton(
-                            icon: Icon(
-                              Icons.cancel,
-                              color: Colors.orangeAccent,
-                              size: 25,
+                          new Switch(
+                            activeColor: Colors.green,
+                            value: _value,
+                            onChanged: (bool value) {
+                              _onChanged(value);
+                            }
                             ),
-                            onPressed: () {
-                              // Navigator.of(context).pop();
-                            },
-                          )
+                          // IconButton(
+                          //   icon: Icon(
+                          //     Icons.speaker,
+                          //     color: Colors.orangeAccent,
+                          //     size: 25,
+                          //   ),
+                          //   onPressed: () {
+                          //     // Navigator.of(context).pop();
+                          //   },
+                          // )
                         ],
+                      ),
+                      Row(children: <Widget>[
+                        // new Switch(
+                        //     value: _value,
+                        //     onChanged: (bool value) {
+                        //       _onChanged(value);
+                        //     }),
+                      //   new SwitchListTile(
+                      //     title: new Text('Music'),
+                      //     activeColor: Colors.red,
+                      //     secondary: const Icon(Icons.music_note),
+                      //       value: _value,
+                      //       onChanged: (bool value) {
+                      //         _onChanged(value);
+                      //       }),
+                      ],
                       ),
                     ],
                   ),
