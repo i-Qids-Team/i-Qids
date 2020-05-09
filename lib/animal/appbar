@@ -1,0 +1,42 @@
+ 
+ AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      title: Text('Animal'),
+      backgroundColor: Colors.red[300],
+      automaticallyImplyLeading: false,
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () {
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (_) {
+              return MainPage(widget.name);
+            }));
+          },
+        ),
+      ],
+    );
+  }
+ ================
+ 
+ 
+ void _showAlertDialog()
+  {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context)
+          {
+              return AlertDialog(
+                title: new Text('ALERT!'),
+                content: new Text('Please enter your username'),
+                actions: <Widget>[
+                  new FlatButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: new Text('try Again?')
+                  )
+                ],
+              );
+          }
+      );
+  }
