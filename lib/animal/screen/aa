@@ -1,0 +1,169 @@
+import 'dart:async';
+import 'dart:math';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:flutter/material.dart';
+import 'package:iqidss/animal/model/_animaldata.dart';
+import 'package:iqidss/mainpage.dart';
+import 'animalguide.dart';
+import 'answeranimal.dart';
+import 'dragobject.dart';
+
+
+class Animal extends StatefulWidget {
+  final int index;
+  final int totalScore;
+  final List<AnimalData> list;
+  
+  Animal(this.index,this.totalScore,this.list);
+
+  @override
+  _AnimalState createState() => _AnimalState();   
+}
+
+class _AnimalState extends State<Animal> {   
+
+  AudioCache player = AudioCache();
+
+  Timer timer;
+  int time = 10; 
+  int scores = 0;
+
+    int _totalScores()
+      {
+        return widget.totalScore + 1;
+      }  
+
+   void initState() {
+    super.initState();
+    startAnimalScreen();
+       animalAudio();
+  }
+
+   startAnimalScreen() async {
+            Timer.periodic(Duration(seconds: 1), (t)
+            {
+              if(time < 1 ) { 
+                    t.cancel();
+                      // AnswerAnimal({this.image, this.animal, this.status, this.color, this.audio});
+                    if(scores == widget.list[widget.index].animalalpha.length){
+                       Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (_) {
+                      return AnswerAnimal(index:widget.index ,scores: _totalScores(),status: true, list: widget.list);
+                       }),
+                       );
+                    }
+                    else{                      
+                       Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (_) {
+                      return AnswerAnimal(index: widget.index,scores: _totalScores(), status: false,list: widget.list);
+                       }),
+                       );
+                    }                   
+              }
+              else if(scores == widget.list[widget.index].animalalpha.length){
+                 t.cancel();
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (_) {
+                     return AnswerAnimal(index:widget.index ,scores: _totalScores(), status: true,list: widget.list);
+                      }),
+                       );
+              }              
+              setState(() {
+              time = time - 1;
+            });
+            });          
+    }
+
+    animalAudio()
+      {
+        player.play(widget.list[widget.index].audio);
+      }  
+
+     
+  final Map<String, bool> score = {};
+  int random = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+       appBar: AppBar(
+        title: Text('Corona, play animal game!'),
+        backgroundColor: Colors.red[300],
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.close),
+            onPressed: ()
+            {
+              Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) {return MainPage(); }));
+            },
+          ),
+        ],
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(2.0),
+        height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/animalasset/bg.png'),
+            fit: BoxFit.cover,
+        ),
+        ),
+      child: Column(
+        children: [
+           Container(height: 20),
+          Container(
+           padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Row( 
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+            Text('Timer : $time', style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold)),            
+             Container(width: 150),
+            Text('${widget.index + 1}/6' , style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold)),
+          ],),
+          ),
+           Container(height: 20),
+          Image.asset(widget.list[widget.index].imagehide, height: 250),
+          Container(height: 20),
+          GestureDetector( onTap: () => player.play(widget.list[widget.index].audio), 
+                            child: Image.asset('assets/animalasset/clickme.png', height: 80) ,),
+          Container(height: 20),         
+          Row( 
+
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,             
+          children : 
+            widget.list[widget.index].animalalpha.keys.map((i) => buildDragTarget(i)).toList(),          
+          ),
+           Row(
+           mainAxisAlignment: MainAxisAlignment.spaceAround,
+           crossAxisAlignment: CrossAxisAlignment.center,
+           children: widget.list[widget.index].animalalpha.keys.map((i) =>
+             DragObject(image: widget.list[widget.index].animalalpha[i], height: widget.list[widget.index].height, score: score[i], data: i)
+           ).toList()..shuffle(Random(random)),           
+          ),         
+        ],
+      ),
+        
+      ),     
+    );
+  }
+
+   DragTarget<String> buildDragTarget(i) {
+    return DragTarget(
+             builder: (context, List<String> data, rejected) 
+             {
+               return score[i] == true ? Image.asset( widget.list[widget.index].animalalpha[i], height:widget.list[widget.index].height) : Image.asset('assets/animalasset/box.png', height:widget.list[widget.index].height);                 
+             },
+             onWillAccept: (data) => data == i,
+             onAccept: (data)
+             {
+               setState(() {                  
+                 score[i] = true;
+                 scores++;
+               });              
+             },
+             );
+          }
+}
