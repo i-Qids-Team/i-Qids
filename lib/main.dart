@@ -19,7 +19,7 @@ void _doNothing(){}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // drawer: Drawer(
+      // drawer: Drawer(cxvnjxcvnjv jck
       //     child: ListView(
       //       children: <Widget>[
       //         DrawerHeader(
@@ -63,7 +63,7 @@ void _doNothing(){}
         padding: const EdgeInsets.all(10.0),
         height: double.infinity,
         decoration: BoxDecoration(
-          image: DecorationImage(
+          image: DecorationImage(cnjxkcnscn
             image: AssetImage('assets/bg.png'),
             fit: BoxFit.cover,
         ),
